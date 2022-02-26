@@ -1,3 +1,3 @@
-# Sssnake
+# Turlte Time
 
-Simple python simulation of classic snake game
+Simple python simulation of classic snake game (with a turtle!!!!)
