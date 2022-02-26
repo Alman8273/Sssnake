@@ -1,1 +1,3 @@
-`<H1> `Sssnake
+# Snake
+
+Simple python simulation of classic snake game
