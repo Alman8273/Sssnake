@@ -1,5 +1,4 @@
-#snake game
-#importing libraries
+#turtle-time
 import turtle #draw on screen w keyboard (like turtle sim on ROS)
 import random
 import time
@@ -7,8 +6,8 @@ import time
 #creating turtle screen
 screen = turtle.Screen()
 screen.cv._rootwindow.resizable(False, False)
-screen.title('Sssnanke')
-screen.setup(width = 700, height = 700)
+screen.title('Turlte-Time')
+screen.setup(width = 700, height = 690)
 screen.tracer(0)
 #turtle.bgpic("back.jpg")
 turtle.bgcolor('#33964e')
@@ -54,38 +53,55 @@ tailOld=[]
 
 #scoring
 scoring = turtle.Turtle()
+# instruc = turtle.Turtle
 scoring.speed(0)
 scoring.color("black")
 scoring.penup()
 scoring.hideturtle()
 scoring.goto(0,300)
-scoring.write("Score: ",align="center",font=("Times",24,"bold"))
+scoring.write("Score: ",align="center",font=("Times",35,"bold"))
+# instruc = turtle.write('ddddddddddddd').place(x=0,y=0)
+turtle.goto(0,255)
+turtle.color('orange')
+turtle.write("Help Franklin get his children!" ,align='center',font=('Times',25,'bold'))
 
 
-#how to move
-def snake_go_up():
+#how to move (heads)
+def turtleup():
     if Turtle.direction != "down":
         Turtle.direction = "up"
                 
-def snake_go_down():
+def turtledown():
     if Turtle.direction != "up":
         Turtle.direction = "down"
         
-def snake_go_left():
+def turtleleft():
     if Turtle.direction != "right":
         Turtle.direction = "left"
    
-def snake_go_right():
+def turtleright():
     if Turtle.direction != "left":
         Turtle.direction = "right"
+
+# #how to move (tail)
+# def tailup():
+#     if tailAdd.direction != "down":
+#         Turtle.direction = "up"
+                
+# def taildown():
+#     if tailAdd.direction != "up":
+#         tailAdd.direction = "down"
         
-        # #set heading
-        # snake.setheading(0)
-        # snake.setheading(90)
-        # snake.setheading(180)
-        # snake.setheading(270)
+# def tailleft():
+#     if tailAdd.direction != "right":
+#         tailAdd.direction = "left"
+   
+# def tailright():
+#     if tailAdd.direction != "left":
+#         tailAdd.direction = "right"
         
-def snake_move():
+#tilts (head)    
+def turtle_move():
     if Turtle.direction == "up":
         y = Turtle.ycor()
         Turtle.sety(y + 20)
@@ -105,13 +121,36 @@ def snake_move():
         x = Turtle.xcor()
         Turtle.setx(x + 20)
         Turtle.setheading(0)
+        
+#tilts (tail)    
+# def tail_move():
+#     if tailAdd.direction == "up":
+#         y = Turtle.ycor()
+#         tailAdd.sety(y + 20)
+#         tailAdd.setheading(90)
+
+    # if Turtle.direction == "down":
+    #     y = Turtle.ycor()
+    #     Turtle.sety(y - 20)
+    #     Turtle.setheading(270)
+
+    # if Turtle.direction == "left":
+    #     x = Turtle.xcor()
+    #     Turtle.setx(x - 20)
+    #     Turtle.setheading(180)
+
+    # if Turtle.direction == "right":
+    #     x = Turtle.xcor()
+    #     Turtle.setx(x + 20)
+    #     Turtle.setheading(0)
+
 
 # Keyboard keys
 screen.listen()
-screen.onkeypress(snake_go_up, "Up")
-screen.onkeypress(snake_go_down, "Down")
-screen.onkeypress(snake_go_left, "Left")
-screen.onkeypress(snake_go_right, "Right")
+screen.onkeypress(turtleup, "Up")
+screen.onkeypress(turtledown, "Down")
+screen.onkeypress(turtleleft, "Left")
+screen.onkeypress(turtleright, "Right")
 
 #main 
 while True:
@@ -129,8 +168,8 @@ while True:
                 #create taill
                 tailAdd = turtle.Turtle()
                 tailAdd.speed(0)
-                tailAdd.shape('square')
-                tailAdd.color('black')
+                tailAdd.shape('turtle')
+                tailAdd.color('yellow')
                 tailAdd.penup()
                 tailOld.append(tailAdd)
             #adding tail ^^^^        
@@ -144,7 +183,7 @@ while True:
                 a= Turtle.xcor()
                 b = Turtle.ycor()
                 tailOld[0].goto(a,b)
-        snake_move()
+        turtle_move()
 
         #hit wall  
         if Turtle.xcor()>280 or Turtle.xcor()< -300 or Turtle.ycor()>240 or Turtle.ycor()<-240:
@@ -152,20 +191,20 @@ while True:
                 screen.clear()
                 screen.bgcolor('turquoise')
                 scoring.goto(0,0)
-                scoring.write("   GAME OVER \n      Your Score  \n\t{}".format(score),align="center",font=("Times",70,"bold"))
+                scoring.write(" GAME OVER \n    Your Score\n            {}".format(score),align="center",font=("Times",50,"bold"))
 
 
-        ## snake collision
+        #collision
         for food in tailOld:
                 if food.distance(Turtle) < 20:
                         time.sleep(1)
                         screen.clear()
                         screen.bgcolor('turquoise')
                         scoring.goto(0,0)
-                        scoring.write("    GAME OVER \n Your Score is {}".format(score),align="center",font=("Courier",30,"bold"))
+                        scoring.write("    GAME OVER \n Your Score is {}".format(score),align="center",font=("Times",30,"bold"))
 
 
                 
         time.sleep(delay)
 
-turtle.Terminator()
+turtle.Terminator() #kill turtle sim
